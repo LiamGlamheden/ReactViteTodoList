@@ -9,7 +9,7 @@ export default function App() {
     e.preventDefault();
     if (newItem === "") return;
 
-    addTodo(newItem); // Fixat! Anropar addTodo istället för saknad funktion
+    addTodo(newItem);
     setNewItem("");
   }
 
@@ -56,12 +56,12 @@ export default function App() {
               <input
                 type="checkbox"
                 checked={todo.completed}
-                onChange={(e) => toggleTodo(todo.id, e.target.checked)} // Fixat `e.target`
+                onChange={(e) => toggleTodo(todo.id, e.target.checked)} 
               />
               {todo.title}
             </label>
             <button
-              onClick={() => deleteTodo(todo.id)} // Fixat stavning
+              onClick={() => deleteTodo(todo.id)} 
               className="btn btn-danger"
             >
               Delete
