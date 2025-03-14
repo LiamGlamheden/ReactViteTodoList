@@ -1,61 +1,74 @@
-import { useState } from "react"
-import "./styles.css"
-import { NewTodoForm } from "./NewTodoForm"
+import React, { useState } from "react";
+import "./styles.css";
 
 export default function App() {
-  const [todos, setTodos] = useState([])
-  // setNewItem("sdfsdf")
-  
+  const [todos, setTodos] = useState([]);
+  const [newItem, setNewItem] = useState("");
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    if (newItem === "") return;
+
+    addTodo(newItem); // Fixat! Anropar addTodo istället för saknad funktion
+    setNewItem("");
+  }
+
   function addTodo(title) {
-    setTodos((currentTodos) => {
-        return [
-            ...currentTodos,
-            {
-                id: crypto.randomUUID(), title: newItem, completed:
-                    false
-            },
-        ]
-
-    })
+    setTodos((currentTodos) => [
+      ...currentTodos,
+      { id: crypto.randomUUID(), title, completed: false },
+    ]);
   }
 
-
-  function ToggleTodo(id, completed){
-    setTodos(currentTodos => {
-      return currentTodos.map(todo => {
-        if (todo.id === id) {
-          return {...todo, completed}
-        }
-        return todo
-      })
-    })
+  function toggleTodo(id, completed) {
+    setTodos((currentTodos) =>
+      currentTodos.map((todo) =>
+        todo.id === id ? { ...todo, completed } : todo
+      )
+    );
   }
 
-  function delteTodo(id) {
-    setTodos(currentTodos => {
-      return currentTodos.filter(todo => todo.id !== id)
-    })
+  function deleteTodo(id) {
+    setTodos((currentTodos) => currentTodos.filter((todo) => todo.id !== id));
   }
-  console.log(todos);
+
   return (
     <>
-  <NewTodoForm onSubmit={addTodo}/>
-  <h1 className="header"> Todo List</h1>
-  <ul className="list">
-    {todos.length === 0 && "No Todos"}
-    {todos.map(todo => {
-      return <li key={todo.id}>
-        <label>
-          <input type="checkbox" checked= {todo.
-            completed}  onChange={e => ToggleTodo(todo.id, e.target)}/>
-         {todo.title}
-        </label>
-        <button onClick ={() => delteTodo(todo.id)}className="btn btn-danger">Delete</button>
-      </li>
-    })}
-   
-  </ul>
+      <form onSubmit={handleSubmit} className="new-item-form">
+        <div className="form-row">
+          <label htmlFor="item">New Item</label>
+          <input
+            value={newItem}
+            onChange={(e) => setNewItem(e.target.value)}
+            type="text"
+            id="item"
+          />
+        </div>
+        <button className="btn">Add</button>
+      </form>
+
+      <h1 className="header">Todo List</h1>
+      <ul className="list">
+        {todos.length === 0 && "No Todos"}
+        {todos.map((todo) => (
+          <li key={todo.id}>
+            <label>
+              <input
+                type="checkbox"
+                checked={todo.completed}
+                onChange={(e) => toggleTodo(todo.id, e.target.checked)} // Fixat `e.target`
+              />
+              {todo.title}
+            </label>
+            <button
+              onClick={() => deleteTodo(todo.id)} // Fixat stavning
+              className="btn btn-danger"
+            >
+              Delete
+            </button>
+          </li>
+        ))}
+      </ul>
     </>
-  
-  )
+  );
 }
