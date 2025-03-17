@@ -4,8 +4,8 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://liamglamheden.github.io/",
-  "predeploy": "npm run build",
+"homepage": "https://liamglamheden.github.io/ReactViteTodoList",
+"predeploy": "npm run build",
   "deploy": "gh-pages -d build",
   "scripts": {
     "dev": "vite",
