@@ -1,20 +1,18 @@
 {
   "main": "src/main.jsx",
-  "name": "package.json",
+  "name": "ReactViteTodoList",
   "private": true,
   "version": "0.0.0",
   "type": "module",
-"homepage": "https://liamglamheden.github.io/ReactViteTodoList",
-"predeploy": "npm run build",
-  "deploy": "gh-pages -d build",
- "scripts": {
-  "dev": "vite",
-  "build": "vite build",
-  "lint": "eslint .",
-  "preview": "vite preview",
-  "predeploy": "npm run build",
-  "deploy": "gh-pages -d dist"
-},
+  "homepage": "https://liamglamheden.github.io/ReactViteTodoList",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint .",
+    "preview": "vite preview",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
+  },
   "dependencies": {
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
